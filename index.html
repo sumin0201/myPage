@@ -3,169 +3,187 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f2ec">
-  <meta name="description" content="이름을 입력하고 따뜻한 환영 인사를 받아보세요.">
-  <title>어서오세요 — 이름을 알려주세요</title>
+  <meta name="theme-color" content="#f8f7f4">
+  <meta name="description" content="Blackberet — 배움이 실제 변화로 이어지도록, 더 나은 교육의 경험을 만듭니다.">
+  <title>Blackberet — Learn with purpose</title>
   <style>
     :root {
-      color-scheme: light;
-      --ink: #19332c;
-      --muted: #63766e;
-      --green: #245b47;
-      --green-dark: #194535;
-      --paper: #f4f2ec;
-      --line: #dce3da;
-      --white: #fffefa;
+      --ink: #171a18;
+      --muted: #727670;
+      --paper: #f8f7f4;
+      --white: #fff;
+      --line: #e6e5df;
+      --green: #174d3b;
+      --lime: #d2f06b;
+      --serif: Georgia, "Times New Roman", serif;
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      color: var(--ink);
+      scroll-behavior: smooth;
     }
     * { box-sizing: border-box; }
-    body {
-      min-height: 100vh;
-      margin: 0;
-      display: grid;
-      place-items: center;
-      padding: 28px;
-      color: var(--ink);
-      background:
-        radial-gradient(ellipse at 12% 14%, rgba(221, 230, 212, .72), transparent 34%),
-        radial-gradient(ellipse at 92% 88%, rgba(232, 222, 197, .65), transparent 30%),
-        var(--paper);
-      font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    body { margin: 0; background: var(--paper); }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
+    header { height: 82px; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .logo { display: inline-flex; align-items: center; gap: 11px; font-size: 19px; font-weight: 850; letter-spacing: -.06em; }
+    .logo-mark { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 8px; background: var(--green); color: var(--lime); font-family: var(--serif); font-size: 17px; font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 38px; color: #575b56; font-size: 13px; font-weight: 650; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-contact { padding: 12px 17px; border: 1px solid #c9cbc4; border-radius: 99px; color: var(--ink) !important; }
+    .hero { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; min-height: 610px; align-items: center; padding: 68px 0 78px; }
+    .hero-copy { position: relative; z-index: 1; padding: 14px 0; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 26px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    .kicker::before { content: ""; width: 25px; height: 1px; background: currentColor; }
+    h1 { max-width: 660px; margin: 0; font-size: clamp(48px, 6.2vw, 78px); line-height: 1.11; letter-spacing: -.075em; font-weight: 750; }
+    h1 em { color: var(--green); font-family: var(--serif); font-weight: 500; letter-spacing: -.07em; }
+    .hero-desc { max-width: 430px; margin: 26px 0 33px; color: var(--muted); font-size: 15px; line-height: 1.9; word-break: keep-all; }
+    .actions { display: flex; align-items: center; gap: 23px; }
+    .button { min-height: 51px; display: inline-flex; align-items: center; justify-content: center; gap: 24px; padding: 0 20px; border-radius: 5px; background: var(--green); color: white; font-size: 13px; font-weight: 750; transition: background .2s, transform .2s; }
+    .button:hover { background: #0f392b; transform: translateY(-2px); }
+    .text-link { font-size: 13px; font-weight: 700; }
+    .text-link span { margin-left: 5px; color: var(--green); }
+    .visual { position: relative; min-height: 430px; display: grid; place-items: center; }
+    .visual-bg { position: absolute; width: min(100%, 440px); aspect-ratio: 1; border-radius: 50%; background: #e9ece2; }
+    .visual-bg::before, .visual-bg::after { content: ""; position: absolute; inset: 7%; border: 1px solid rgba(23,77,59,.12); border-radius: 50%; }
+    .visual-bg::after { inset: 17%; }
+    .orbit-label { position: absolute; top: 12%; right: 7%; display: grid; place-items: center; width: 93px; height: 93px; border-radius: 50%; background: var(--lime); color: #203322; text-align: center; font-size: 10px; font-weight: 850; line-height: 1.4; letter-spacing: .06em; transform: rotate(9deg); }
+    .book-stack { position: relative; z-index: 1; width: 250px; height: 270px; transform: rotate(-8deg); }
+    .book { position: absolute; width: 205px; height: 145px; border-radius: 5px 12px 12px 5px; box-shadow: 0 18px 25px rgba(31,50,39,.13); }
+    .book::after { content: ""; position: absolute; top: 0; bottom: 0; left: 13px; width: 1px; background: rgba(255,255,255,.38); }
+    .book.back { top: 21px; left: 30px; background: #c4a87f; transform: rotate(13deg); }
+    .book.mid { top: 72px; left: 12px; background: #b5c4a4; transform: rotate(-7deg); }
+    .book.front { top: 120px; left: 29px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 23px 17px; color: #f8f7ef; background: var(--green); transform: rotate(5deg); }
+    .book.front strong { font-size: 11px; letter-spacing: .16em; }
+    .book.front span { font-family: var(--serif); font-size: 26px; line-height: 1.05; }
+    .spark { position: absolute; z-index: 2; color: var(--green); font-size: 27px; }
+    .spark.a { top: 19%; left: 17%; }
+    .spark.b { right: 13%; bottom: 23%; font-size: 19px; }
+    .manifesto { padding: 31px 0; background: var(--green); color: #fff; }
+    .manifesto-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .manifesto-label { color: #c4d7cb; font-size: 10px; font-weight: 800; letter-spacing: .17em; }
+    .manifesto p { max-width: 750px; margin: 0; font-size: clamp(17px, 2.2vw, 23px); font-weight: 600; line-height: 1.55; letter-spacing: -.04em; word-break: keep-all; }
+    .section { padding: 112px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 46px; }
+    .section-kicker { margin: 0 0 15px; color: #738273; font-size: 10px; font-weight: 850; letter-spacing: .18em; }
+    h2 { margin: 0; font-size: clamp(33px, 4vw, 48px); line-height: 1.2; letter-spacing: -.065em; }
+    .section-intro { max-width: 390px; margin: 0 0 4px; color: var(--muted); font-size: 14px; line-height: 1.85; word-break: keep-all; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; padding: 27px; border: 1px solid var(--line); background: rgba(255,255,255,.55); }
+    .card-number { color: #8c9a8d; font-family: var(--serif); font-size: 13px; font-style: italic; }
+    .card-icon { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid #d9e0d4; border-radius: 50%; color: var(--green); font-family: var(--serif); font-size: 20px; }
+    .card h3 { margin: 28px 0 10px; font-size: 19px; letter-spacing: -.04em; }
+    .card p { max-width: 290px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; word-break: keep-all; }
+    .about { padding: 91px 0; background: #eeeee8; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; }
+    .about-copy { color: var(--muted); font-size: 14px; line-height: 1.9; word-break: keep-all; }
+    .about-copy p { margin: 0 0 16px; }
+    .values { display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 34px; border-top: 1px solid #d5d7d0; }
+    .value { padding: 20px 10px 0 0; }
+    .value strong { display: block; margin-bottom: 7px; color: var(--green); font-size: 14px; }
+    .value span { color: #777d75; font-size: 12px; }
+    .contact { padding: 94px 0; color: white; background: #18241e; }
+    .contact-inner { display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+    .contact .section-kicker { color: #b3c1ad; }
+    .contact h2 { max-width: 520px; }
+    .contact-meta { display: grid; gap: 13px; min-width: 260px; }
+    .contact-meta a, .contact-meta p { margin: 0; color: #e0e5df; font-size: 14px; }
+    .contact-meta small { display: inline-block; width: 62px; color: #98a79b; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+    .contact-meta a:hover { color: var(--lime); }
+    footer { padding: 22px 0; color: #888e88; background: #121a16; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-inner strong { color: #e7e9e4; font-size: 13px; }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 40px, 560px); }
+      header { height: 70px; }
+      .nav-links { gap: 17px; }
+      .nav-links a:not(.nav-contact) { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 61px 0 30px; }
+      h1 { font-size: clamp(47px, 11vw, 68px); }
+      .hero-desc { max-width: 470px; }
+      .visual { min-height: 350px; }
+      .visual-bg { width: 330px; }
+      .book-stack { transform: scale(.85) rotate(-8deg); }
+      .orbit-label { right: 11%; top: 8%; }
+      .manifesto-inner, .section-head, .contact-inner { align-items: flex-start; flex-direction: column; }
+      .section { padding: 78px 0; }
+      .section-head { margin-bottom: 30px; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: 205px; }
+      .about { padding: 72px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 28px; }
+      .contact { padding: 72px 0; }
+      .contact-meta { margin-top: 8px; }
     }
-    .page { width: min(100%, 920px); }
-    .topline {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--green); }
-    .brand-mark { width: 10px; height: 10px; border-radius: 50%; background: #87a888; box-shadow: 0 0 0 5px rgba(135,168,136,.15); }
-    .card {
-      position: relative;
-      overflow: hidden;
-      min-height: 490px;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      border: 1px solid rgba(25, 69, 53, .08);
-      border-radius: 26px;
-      background: var(--white);
-      box-shadow: 0 28px 80px rgba(38, 58, 44, .10), 0 3px 10px rgba(38, 58, 44, .04);
-    }
-    .content { position: relative; z-index: 1; padding: clamp(36px, 7vw, 76px); align-self: center; }
-    .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 22px; color: #66826f; font-size: 12px; font-weight: 800; letter-spacing: .14em; }
-    .eyebrow::before { content: ""; width: 25px; height: 1px; background: #9cb69e; }
-    h1 { margin: 0; font-size: clamp(36px, 5.3vw, 58px); line-height: 1.2; letter-spacing: -.055em; font-weight: 750; }
-    h1 span { color: var(--green); }
-    .intro { max-width: 370px; margin: 18px 0 34px; color: var(--muted); font-size: 15px; line-height: 1.8; word-break: keep-all; }
-    label { display: block; margin-bottom: 9px; color: #40574d; font-size: 13px; font-weight: 700; }
-    .field { display: flex; gap: 9px; }
-    input {
-      width: 100%; min-width: 0; height: 54px; padding: 0 16px;
-      border: 1px solid var(--line); border-radius: 12px; outline: none;
-      background: #fff; color: var(--ink); font: inherit; font-size: 15px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    input::placeholder { color: #a0ada4; }
-    input:focus { border-color: #6e9b7f; box-shadow: 0 0 0 4px rgba(110,155,127,.15); }
-    button {
-      flex: 0 0 auto; height: 54px; padding: 0 21px; border: 0; border-radius: 12px;
-      color: white; background: var(--green); font: inherit; font-size: 14px; font-weight: 750;
-      cursor: pointer; transition: background .2s, transform .2s;
-    }
-    button:hover { background: var(--green-dark); transform: translateY(-1px); }
-    button:focus-visible { outline: 3px solid #9dbfa4; outline-offset: 3px; }
-    .greeting { min-height: 28px; margin: 18px 0 0; color: var(--green); font-size: 18px; font-weight: 750; }
-    .greeting:empty { display: none; }
-    .greeting.show { animation: arrive .35s ease both; }
-    .art {
-      position: relative; display: grid; place-items: center; overflow: hidden;
-      background: linear-gradient(155deg, #e6ecdf, #d7e3d4 55%, #c7d8c9);
-    }
-    .art::before, .art::after { content: ""; position: absolute; border: 1px solid rgba(36,91,71,.13); border-radius: 50%; }
-    .art::before { width: 340px; height: 340px; }
-    .art::after { width: 440px; height: 440px; }
-    .sun { position: absolute; top: 14%; right: 15%; width: 58px; height: 58px; border-radius: 50%; background: #f7f0d9; box-shadow: 0 0 48px rgba(247,240,217,.8); }
-    .plant { position: relative; z-index: 1; width: 210px; height: 260px; margin-top: 35px; }
-    .stem { position: absolute; bottom: 45px; left: 103px; width: 3px; height: 170px; border-radius: 3px; background: #67876b; transform: rotate(4deg); transform-origin: bottom; }
-    .leaf { position: absolute; width: 72px; height: 38px; border-radius: 100% 0 100% 0; background: linear-gradient(135deg, #91ad88, #527b60); }
-    .leaf.one { left: 29px; top: 88px; transform: rotate(20deg); }
-    .leaf.two { left: 105px; top: 49px; transform: scaleX(-1) rotate(17deg); }
-    .leaf.three { left: 30px; top: 151px; transform: rotate(12deg) scale(.88); background: linear-gradient(135deg, #a5bb91, #698a68); }
-    .leaf.four { left: 105px; top: 115px; transform: scaleX(-1) rotate(18deg) scale(.88); background: linear-gradient(135deg, #a5bb91, #698a68); }
-    .pot { position: absolute; bottom: 12px; left: 62px; width: 91px; height: 65px; border-radius: 8px 8px 24px 24px; background: linear-gradient(110deg, #bd886b, #d5a184); box-shadow: 0 16px 24px rgba(76,93,70,.15); }
-    .pot::before { content: ""; position: absolute; top: -8px; left: -5px; width: 101px; height: 15px; border-radius: 8px; background: #c79173; }
-    .caption { position: absolute; bottom: 25px; color: #5e7865; font-size: 11px; font-weight: 700; letter-spacing: .12em; }
-    footer { margin-top: 20px; text-align: center; color: #87948b; font-size: 11px; letter-spacing: .04em; }
-    @keyframes arrive { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 650px) {
-      body { padding: 18px; }
-      .topline { margin: 0 3px 14px; }
-      .card { min-height: auto; grid-template-columns: 1fr; border-radius: 22px; }
-      .content { padding: 42px 28px 34px; }
-      .intro { margin-bottom: 27px; }
-      .art { min-height: 230px; }
-      .plant { transform: scale(.75); margin-top: 25px; }
-      .sun { top: 13%; right: 20%; width: 42px; height: 42px; }
-      .caption { bottom: 14px; }
-    }
-    @media (max-width: 380px) { .field { flex-direction: column; } button { width: 100%; } }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
   </style>
 </head>
 <body>
-  <main class="page">
-    <div class="topline">
-      <div class="brand"><span class="brand-mark" aria-hidden="true"></span> A LITTLE WELCOME</div>
-      <span>YOUR DAY, STARTS HERE</span>
-    </div>
-    <section class="card" aria-labelledby="page-title">
-      <div class="content">
-        <p class="eyebrow">반가워요, 오늘</p>
-        <h1 id="page-title">이름을 알려주시면<br><span>환영할게요.</span></h1>
-        <p class="intro">이곳에 오신 걸 환영해요. 이름을 입력하고 버튼을 눌러 따뜻한 인사를 받아보세요.</p>
-        <form id="welcome-form">
-          <label for="name">어떻게 불러드릴까요?</label>
-          <div class="field">
-            <input id="name" name="name" type="text" placeholder="이름을 입력해 주세요" autocomplete="given-name" maxlength="40" required>
-            <button type="submit">인사 받기 <span aria-hidden="true">↗</span></button>
-          </div>
-        </form>
-        <p class="greeting" id="greeting" aria-live="polite"></p>
+  <header>
+    <nav class="nav wrap" aria-label="주요 메뉴">
+      <a class="logo" href="#home" aria-label="Blackberet 홈"><span class="logo-mark">b</span>Blackberet</a>
+      <div class="nav-links">
+        <a href="#approach">교육 방향</a>
+        <a href="#about">소개</a>
+        <a class="nav-contact" href="#contact">문의하기 ↗</a>
       </div>
-      <div class="art" aria-hidden="true">
-        <div class="sun"></div>
-        <div class="plant">
-          <div class="stem"></div><div class="leaf one"></div><div class="leaf two"></div>
-          <div class="leaf three"></div><div class="leaf four"></div><div class="pot"></div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero wrap" id="home">
+      <div class="hero-copy">
+        <p class="kicker">Education, with intention</p>
+        <h1>배움이 삶의<br><em>가능성</em>이 되도록.</h1>
+        <p class="hero-desc">Blackberet은 더 나은 배움의 경험을 고민합니다. 사람과 현장에 필요한 교육을 설계하고, 배움이 새로운 가능성으로 이어지도록 함께합니다.</p>
+        <div class="actions">
+          <a class="button" href="#approach">교육 방향 살펴보기 <span aria-hidden="true">↘</span></a>
+          <a class="text-link" href="#about">Blackberet 소개 <span>↗</span></a>
         </div>
-        <span class="caption">GROW AT YOUR OWN PACE</span>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="visual-bg"></div><span class="orbit-label">LEARN<br>GROW<br>REPEAT</span>
+        <span class="spark a">✳</span><span class="spark b">✦</span>
+        <div class="book-stack"><div class="book back"></div><div class="book mid"></div><div class="book front"><strong>BLACKBERET</strong><span>Learning<br>in motion.</span></div></div>
       </div>
     </section>
-    <footer>오늘도 당신의 속도로, 좋은 하루를 시작해요.</footer>
+    <section class="manifesto">
+      <div class="manifesto-inner wrap">
+        <span class="manifesto-label">OUR BELIEF</span>
+        <p>좋은 교육은 지식을 전하는 데서 끝나지 않고,<br>배운 것을 삶과 일에서 꺼내 쓸 수 있게 합니다.</p>
+      </div>
+    </section>
+    <section class="section wrap" id="approach">
+      <div class="section-head">
+        <div><p class="section-kicker">WHAT WE CARE ABOUT</p><h2>배움의 다음 장면까지<br>생각합니다.</h2></div>
+        <p class="section-intro">교육이 필요한 사람과 환경을 먼저 살피고, 각자의 목표에 맞는 배움의 과정을 고민합니다.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div><span class="card-number">01 / UNDERSTAND</span><div class="card-icon" aria-hidden="true">⌕</div></div><div><h3>필요에서 출발하는 교육</h3><p>학습자와 현장의 맥락을 이해하고, 무엇을 위한 배움인지 함께 정의합니다.</p></div></article>
+        <article class="card"><div><span class="card-number">02 / DESIGN</span><div class="card-icon" aria-hidden="true">◇</div></div><div><h3>목표에 맞춘 학습 경험</h3><p>배움의 목적과 참여자의 상황에 어울리는 교육 경험을 설계합니다.</p></div></article>
+        <article class="card"><div><span class="card-number">03 / APPLY</span><div class="card-icon" aria-hidden="true">↗</div></div><div><h3>배움이 이어지는 순간</h3><p>교육에서 얻은 생각과 지식이 일상과 현장에서 이어지도록 응원합니다.</p></div></article>
+      </div>
+    </section>
+    <section class="about" id="about">
+      <div class="about-grid wrap">
+        <div><p class="section-kicker">ABOUT BLACKBERET</p><h2>배움에 진심을<br>더하는 사람들.</h2></div>
+        <div class="about-copy">
+          <p>Blackberet은 교육사업을 통해 사람들의 성장과 변화를 돕습니다. 교육을 둘러싼 다양한 목소리에 귀 기울이고, 배움이 실제로 닿는 경험을 만들기 위해 고민합니다.</p>
+          <p>한 번의 교육이 새로운 질문과 시도로 이어질 수 있도록, 진정성 있는 교육 파트너가 되겠습니다.</p>
+          <div class="values"><div class="value"><strong>사람을 먼저</strong><span>학습자의 관점에서 생각합니다.</span></div><div class="value"><strong>목적에 맞게</strong><span>배움의 이유를 놓치지 않습니다.</span></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="contact" id="contact">
+      <div class="contact-inner wrap">
+        <div><p class="section-kicker">LET'S TALK</p><h2>교육에 관한 이야기를<br>들려주세요.</h2></div>
+        <div class="contact-meta">
+          <p><small>CONTACT</small><a href="tel:01025613735">010-2561-3735</a></p>
+          <p><small>대표자</small>박경훈</p>
+          <p><small>회사명</small>Blackberet</p>
+        </div>
+      </div>
+    </section>
   </main>
-  <script>
-    const form = document.querySelector("#welcome-form");
-    const nameInput = document.querySelector("#name");
-    const greeting = document.querySelector("#greeting");
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const name = nameInput.value.trim();
-      if (!name) {
-        nameInput.setCustomValidity("이름을 입력해 주세요.");
-        nameInput.reportValidity();
-        nameInput.addEventListener("input", () => nameInput.setCustomValidity(""), { once: true });
-        return;
-      }
-      greeting.textContent = `${name} 님, 어서오세요!`;
-      greeting.classList.remove("show");
-      requestAnimationFrame(() => greeting.classList.add("show"));
-    });
-  </script>
+  <footer><div class="footer-inner wrap"><strong>Blackberet</strong><span>© Blackberet. All rights reserved.</span></div></footer>
 </body>
 </html>
